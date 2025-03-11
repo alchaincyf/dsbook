@@ -47,23 +47,28 @@ document.addEventListener('DOMContentLoaded', function() {
     const nextBtn = document.querySelector('.next-btn');
     const reviewsSlider = document.querySelector('.reviews-slider');
     
-    nextBtn.addEventListener('click', function() {
-        reviewsSlider.scrollBy({
-            left: 350,
-            behavior: 'smooth'
+    if (prevBtn && nextBtn && reviewsSlider) {
+        nextBtn.addEventListener('click', function() {
+            reviewsSlider.scrollBy({
+                left: 350,
+                behavior: 'smooth'
+            });
         });
-    });
-    
-    prevBtn.addEventListener('click', function() {
-        reviewsSlider.scrollBy({
-            left: -350,
-            behavior: 'smooth'
+        
+        prevBtn.addEventListener('click', function() {
+            reviewsSlider.scrollBy({
+                left: -350,
+                behavior: 'smooth'
+            });
         });
-    });
+    }
     
     // 使用花生的实际信息替换占位符
-    // 作者头像 - 使用花生的个人网站头像
-    document.querySelector('.author-image img').src = 'https://www.huasheng.ai/assets/img/avatar.jpg';
+    // 作者头像 - 使用提供的icon.jpg
+    const authorImage = document.querySelector('.author-image img');
+    if (authorImage) {
+        authorImage.src = 'icon.jpg';
+    }
     
     // 更新作者简介
     const authorBio = document.querySelector('.author-bio');
@@ -117,9 +122,15 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 读者头像
     const reviewerAvatars = document.querySelectorAll('.reviewer-avatar img');
-    reviewerAvatars[0].src = 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80';
-    reviewerAvatars[1].src = 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80';
-    reviewerAvatars[2].src = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80';
+    if (reviewerAvatars.length > 0) {
+        reviewerAvatars[0].src = 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80';
+        if (reviewerAvatars.length > 1) {
+            reviewerAvatars[1].src = 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80';
+        }
+        if (reviewerAvatars.length > 2) {
+            reviewerAvatars[2].src = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80';
+        }
+    }
     
     // 商店图标
     const storeGrid = document.querySelector('.store-grid');
@@ -163,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <li><a href="#" class="footer-wechat">微信公众号：花叔</a></li>
             <li><a href="https://space.bilibili.com/14097567" target="_blank">B站：AI进化论-花生</a></li>
             <li><a href="https://www.youtube.com/@Alchain" target="_blank">YouTube：AI进化论-花生</a></li>
-            <li><a href="mailto:contact@huasheng.ai">contact@huasheng.ai</a></li>
+            <li><a href="mailto:alchaincyf@gmail.com">alchaincyf@gmail.com</a></li>
         `;
         
         // 添加点击复制微信公众号功能
