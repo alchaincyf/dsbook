@@ -17,6 +17,9 @@
 
       gtag('config', 'G-MYXZWX6KCM');
     </script>
+
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -242,23 +245,80 @@
         </div>
     </section>
 
-    <section id="author" class="author">
-        <div class="container">
-            <h2 class="section-title">作者介绍</h2>
-            <div class="author-content">
-                <div class="author-image">
-                    <img src="author.jpg" alt="陈云飞(花生)">
-                </div>
-                <div class="author-bio">
-                    <h3>陈云飞（@花生）</h3>
-                    <p>AI时代的实践者与探索者，从大厂产品人到AI创业者的转变。</p>
-                    <p>在AI的帮助下，从未写过代码的他成功开发了iOS应用"小猫补光灯Pro"，并登顶中国区App Store付费总榜。</p>
-                    <p>他的B站和YouTube频道"AI进化论-花生"已分别拥有11万+和5万+粉丝，致力于分享AI实践经验。</p>
-                    <p>他相信AI不是少数技术精英的专属，而是属于所有人的工具，只要掌握正确方法，每个人都能在AI时代找到自己的增长路径。</p>
-                    <div class="social-links">
-                        <a href="https://space.bilibili.com/AI进化论-花生" target="_blank"><i class="fab fa-bilibili"></i></a>
-                        <a href="https://www.youtube.com/AI进化论-花生" target="_blank"><i class="fab fa-youtube"></i></a>
-                        <a href="https://weixin.qq.com/花叔" target="_blank"><i class="fab fa-weixin"></i></a>
+    <!-- 作者介绍区域 -->
+    <section id="author" class="py-24 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 relative">
+                作者介绍
+                <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-gray-900 mt-4"></span>
+            </h2>
+            
+            <div class="max-w-6xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="flex flex-col md:flex-row">
+                    <!-- 作者图片 -->
+                    <div class="md:w-2/5 bg-gray-100 flex items-center justify-center p-8">
+                        <img src="icon.jpg" alt="陈云飞(花生)" class="w-64 h-64 object-cover rounded-full border-4 border-white shadow-md">
+                    </div>
+                    
+                    <!-- 作者信息 -->
+                    <div class="md:w-3/5 p-8 md:p-12">
+                        <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">陈云飞（@花生）</h3>
+                        
+                        <div class="space-y-3 text-gray-700 mb-6">
+                            <p class="flex items-center">
+                                <span class="w-6 h-6 flex items-center justify-center rounded-full bg-gray-900 text-white mr-3">
+                                    <i class="fas fa-code text-xs"></i>
+                                </span>
+                                <span>AI Native Coder｜第一代不会写代码的独立开发者</span>
+                            </p>
+                            <p class="flex items-center">
+                                <span class="w-6 h-6 flex items-center justify-center rounded-full bg-gray-900 text-white mr-3">
+                                    <i class="fas fa-mobile-alt text-xs"></i>
+                                </span>
+                                <span>AppStore 付费榜 Top1「小猫补光灯」开发者</span>
+                            </p>
+                            <p class="flex items-center">
+                                <span class="w-6 h-6 flex items-center justify-center rounded-full bg-gray-900 text-white mr-3">
+                                    <i class="fas fa-video text-xs"></i>
+                                </span>
+                                <span>10万+粉AI博主，B站/YouTube 频道：AI进化论-花生</span>
+                            </p>
+                            <p class="flex items-center">
+                                <span class="w-6 h-6 flex items-center justify-center rounded-full bg-gray-900 text-white mr-3">
+                                    <i class="fas fa-chalkboard-teacher text-xs"></i>
+                                </span>
+                                <span>微软｜LinkedIn AI课程讲师</span>
+                            </p>
+                            <p class="flex items-center">
+                                <span class="w-6 h-6 flex items-center justify-center rounded-full bg-gray-900 text-white mr-3">
+                                    <i class="fas fa-award text-xs"></i>
+                                </span>
+                                <span>最受DeepSeek推荐的AI编程up主</span>
+                            </p>
+                        </div>
+                        
+                        <!-- 社交媒体链接 -->
+                        <div class="flex space-x-4 mt-8">
+                            <a href="https://www.youtube.com/@Alchain" target="_blank" class="w-10 h-10 rounded-full bg-gray-100 hover:bg-red-600 hover:text-white flex items-center justify-center transition-colors duration-300" title="YouTube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                            <a href="https://space.bilibili.com/14097567" target="_blank" class="w-10 h-10 rounded-full bg-gray-100 hover:bg-blue-500 hover:text-white flex items-center justify-center transition-colors duration-300" title="Bilibili">
+                                <i class="fab fa-bilibili"></i>
+                            </a>
+                            <a href="https://www.xiaohongshu.com/user/profile/5abc6f17e8ac2b109179dfdf" target="_blank" class="w-10 h-10 rounded-full bg-gray-100 hover:bg-red-500 hover:text-white flex items-center justify-center transition-colors duration-300" title="小红书">
+                                <i class="fas fa-heart"></i>
+                            </a>
+                            <a href="https://x.com/AlchainHust" target="_blank" class="w-10 h-10 rounded-full bg-gray-100 hover:bg-black hover:text-white flex items-center justify-center transition-colors duration-300" title="X">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="wechat-link w-10 h-10 rounded-full bg-gray-100 hover:bg-green-500 hover:text-white flex items-center justify-center transition-colors duration-300 relative" title="微信">
+                                <i class="fab fa-weixin"></i>
+                                <div class="wechat-qrcode hidden absolute bottom-12 left-0 bg-white p-2 rounded shadow-lg z-10">
+                                    <img src="/images/微信.jpg" alt="微信二维码" width="150" height="150" class="rounded">
+                                    <p class="text-xs text-center mt-1 text-gray-600">点击复制微信号</p>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

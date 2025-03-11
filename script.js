@@ -39,7 +39,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const navMenu = document.querySelector('.nav-menu');
     
     menuToggle.addEventListener('click', function() {
-        navMenu.classList.toggle('active');
+        navMenu.classList.toggle('hidden');
+        navMenu.classList.toggle('flex');
     });
     
     // 评论轮播
@@ -99,11 +100,11 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (wechatLink && wechatQrcode) {
             wechatLink.addEventListener('mouseenter', function() {
-                wechatQrcode.style.display = 'block';
+                wechatQrcode.classList.remove('hidden');
             });
             
             wechatLink.addEventListener('mouseleave', function() {
-                wechatQrcode.style.display = 'none';
+                wechatQrcode.classList.add('hidden');
             });
             
             // 点击复制微信号
@@ -193,7 +194,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // 视频切换功能 - 修改版
+    // 视频切换功能
     const videoTabs = document.querySelectorAll('.video-tab');
     const videoPreviews = document.querySelectorAll('.video-preview');
     
@@ -202,14 +203,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const videoId = this.getAttribute('data-video');
             
             // 切换标签激活状态
-            videoTabs.forEach(t => t.classList.remove('active'));
-            this.classList.add('active');
+            videoTabs.forEach(t => t.classList.remove('bg-primary', 'text-white'));
+            this.classList.add('bg-primary', 'text-white');
             
             // 切换视频预览显示
             videoPreviews.forEach(preview => {
-                preview.classList.remove('current');
+                preview.classList.add('hidden');
                 if (preview.id === `preview-${videoId}`) {
-                    preview.classList.add('current');
+                    preview.classList.remove('hidden');
                 }
             });
         });
