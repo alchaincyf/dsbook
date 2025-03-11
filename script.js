@@ -192,6 +192,40 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
+    
+    // 视频切换功能 - 修改版
+    const videoTabs = document.querySelectorAll('.video-tab');
+    const videoPreviews = document.querySelectorAll('.video-preview');
+    
+    videoTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const videoId = this.getAttribute('data-video');
+            
+            // 切换标签激活状态
+            videoTabs.forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            
+            // 切换视频预览显示
+            videoPreviews.forEach(preview => {
+                preview.classList.remove('current');
+                if (preview.id === `preview-${videoId}`) {
+                    preview.classList.add('current');
+                }
+            });
+        });
+    });
+    
+    // 点击缩略图直接跳转到B站
+    const videoThumbnails = document.querySelectorAll('.video-thumbnail');
+    videoThumbnails.forEach(thumbnail => {
+        thumbnail.addEventListener('click', function() {
+            const videoPreview = this.closest('.video-preview');
+            const videoLink = videoPreview.querySelector('.video-info a');
+            if (videoLink) {
+                window.open(videoLink.href, '_blank');
+            }
+        });
+    });
 });
 
 // 添加提示消息功能
