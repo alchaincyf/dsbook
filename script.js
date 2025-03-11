@@ -226,6 +226,63 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+    
+    // 添加滚动动画
+    const animateOnScroll = function() {
+        const elements = document.querySelectorAll('.fade-in-element');
+        
+        elements.forEach(element => {
+            const elementPosition = element.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight / 1.3;
+            
+            if (elementPosition < screenPosition) {
+                element.classList.add('visible');
+            }
+        });
+    };
+    
+    // 初始化需要动画的元素
+    const sectionsToAnimate = document.querySelectorAll('section');
+    sectionsToAnimate.forEach(section => {
+        if (!section.classList.contains('hero')) {
+            section.classList.add('fade-in-element');
+        }
+    });
+    
+    // 监听滚动事件
+    window.addEventListener('scroll', animateOnScroll);
+    
+    // 初始检查
+    animateOnScroll();
+    
+    // 模拟AI打字效果
+    setTimeout(() => {
+        const typingMessage = document.querySelector('.message.ai.typing');
+        if (typingMessage) {
+            typingMessage.classList.remove('typing');
+        }
+    }, 3000);
+    
+    // 添加粒子效果
+    const particlesContainer = document.querySelector('.ai-particles');
+    if (particlesContainer) {
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            // 随机位置和大小
+            const size = Math.random() * 5 + 2;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            
+            // 随机动画延迟
+            particle.style.animationDelay = `${Math.random() * 5}s`;
+            
+            particlesContainer.appendChild(particle);
+        }
+    }
 });
 
 // 添加提示消息功能
@@ -248,4 +305,45 @@ function showToast(message) {
     setTimeout(() => {
         toast.classList.remove('show');
     }, 3000);
-} 
+}
+
+// 添加CSS样式
+const style = document.createElement('style');
+style.textContent = `
+    .particle {
+        position: absolute;
+        background-color: rgba(0, 119, 204, 0.2);
+        border-radius: 50%;
+        pointer-events: none;
+        animation: float 15s infinite linear;
+    }
+    
+    @keyframes float {
+        0% {
+            transform: translateY(0) translateX(0) rotate(0deg);
+            opacity: 0;
+        }
+        10% {
+            opacity: 0.8;
+        }
+        90% {
+            opacity: 0.8;
+        }
+        100% {
+            transform: translateY(-100px) translateX(100px) rotate(360deg);
+            opacity: 0;
+        }
+    }
+    
+    .fade-in-element {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    
+    .fade-in-element.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+`;
+document.head.appendChild(style); 

@@ -1306,3 +1306,314 @@ footer {
         font-size: 1.2rem;
     }
 }
+
+/* 创造令人惊叹的视觉效果 */
+
+/* AI粒子背景 */
+.ai-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.ai-particles::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background-image: 
+        radial-gradient(circle at 30% 20%, rgba(0, 119, 204, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 70% 60%, rgba(0, 119, 204, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(0, 119, 204, 0.05) 0%, transparent 40%);
+    filter: blur(10px);
+    z-index: -1;
+}
+
+/* 打字机效果 */
+.typing-container {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+}
+
+.highlight {
+    color: var(--primary-color);
+    position: relative;
+}
+
+.highlight::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-color);
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: highlightIn 1.5s 1s forwards;
+}
+
+@keyframes highlightIn {
+    to { transform: scaleX(1); }
+}
+
+.cursor {
+    width: 3px;
+    height: 42px;
+    background-color: var(--primary-color);
+    display: inline-block;
+    margin-left: 5px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* 书籍发光效果 */
+.hero-image {
+    position: relative;
+}
+
+.book-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(0, 119, 204, 0.3);
+    opacity: 0;
+    animation: glowPulse 4s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.7; }
+}
+
+/* AI对话演示区域 */
+.ai-demo {
+    padding: 100px 0;
+    background-color: var(--light-bg);
+    position: relative;
+    overflow: hidden;
+}
+
+.ai-demo::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(120deg, rgba(0, 119, 204, 0.03) 0%, transparent 70%),
+        linear-gradient(240deg, rgba(0, 119, 204, 0.03) 0%, transparent 70%);
+    z-index: 0;
+}
+
+.demo-intro {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    color: var(--light-text);
+}
+
+.chat-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    transform: translateY(20px);
+    opacity: 0;
+    animation: slideUp 0.8s 0.3s forwards;
+}
+
+@keyframes slideUp {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.chat-header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 15px 20px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+}
+
+.chat-title {
+    flex: 1;
+}
+
+.chat-messages {
+    padding: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.message {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    max-width: 85%;
+}
+
+.message.user {
+    align-self: flex-end;
+    margin-left: auto;
+}
+
+.message.ai {
+    align-self: flex-start;
+}
+
+.message-content {
+    padding: 15px;
+    border-radius: 18px;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.user .message-content {
+    background-color: var(--primary-color);
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+.ai .message-content {
+    background-color: #f0f7ff;
+    color: var(--text-color);
+    border-bottom-left-radius: 4px;
+}
+
+.ai.typing .message-content {
+    position: relative;
+}
+
+.ai.typing .message-content::after {
+    content: '';
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 40px;
+    height: 20px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 30"><circle cx="15" cy="15" r="5" fill="%230077cc"><animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.1"/></circle><circle cx="45" cy="15" r="5" fill="%230077cc"><animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.2"/></circle><circle cx="75" cy="15" r="5" fill="%230077cc"><animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.3"/></circle></svg>');
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0.7;
+}
+
+.chat-input {
+    display: flex;
+    padding: 15px;
+    border-top: 1px solid #eee;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.chat-input input:focus {
+    border-color: var(--primary-color);
+}
+
+.send-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    margin-left: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.send-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+.chat-note {
+    text-align: center;
+    padding: 10px;
+    font-size: 0.9rem;
+    color: var(--light-text);
+    background-color: #f9f9f9;
+    border-top: 1px solid #eee;
+}
+
+/* 视频区域增强 */
+.video-tabs {
+    position: relative;
+    z-index: 1;
+}
+
+.video-tab {
+    position: relative;
+    overflow: hidden;
+}
+
+.video-tab::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+}
+
+.video-tab:hover::before {
+    transform: translateX(100%);
+}
+
+.video-preview {
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.video-preview.current {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .chat-container {
+        margin: 0 15px;
+    }
+    
+    .message {
+        max-width: 90%;
+    }
+}
