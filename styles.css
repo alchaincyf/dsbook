@@ -599,6 +599,19 @@ nav {
     font-size: 1.1rem;
 }
 
+/* 购买链接区域图标样式 */
+.store-card i {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    transition: var(--transition);
+}
+
+.store-card:hover i {
+    transform: scale(1.2);
+    color: var(--secondary-color);
+}
+
 /* 读者评价区域样式 */
 .reviews {
     padding: 80px 0;
@@ -998,4 +1011,71 @@ footer {
     .store-grid {
         grid-template-columns: 1fr 1fr;
     }
+}
+
+/* 社交媒体链接样式 */
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    transition: var(--transition);
+    position: relative;
+}
+
+.social-links a:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-3px);
+}
+
+.social-links i {
+    font-size: 1.2rem;
+}
+
+/* 微信二维码样式 */
+.wechat-qrcode {
+    display: none;
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    background-color: white;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+
+.wechat-link {
+    position: relative;
+}
+
+/* Toast消息样式 */
+.toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-size: 1rem;
+    z-index: 1000;
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
 }
