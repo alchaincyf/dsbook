@@ -196,23 +196,24 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 视频切换功能
     const videoTabs = document.querySelectorAll('.video-tab');
-    const videoPreviews = document.querySelectorAll('.video-preview');
     
     videoTabs.forEach(tab => {
         tab.addEventListener('click', function() {
+            // 移除所有标签的active类
+            videoTabs.forEach(t => t.classList.remove('active'));
+            // 为当前标签添加active类
+            this.classList.add('active');
+            
+            // 获取视频ID
             const videoId = this.getAttribute('data-video');
             
-            // 切换标签激活状态
-            videoTabs.forEach(t => t.classList.remove('bg-primary', 'text-white'));
-            this.classList.add('bg-primary', 'text-white');
-            
-            // 切换视频预览显示
-            videoPreviews.forEach(preview => {
-                preview.classList.add('hidden');
-                if (preview.id === `preview-${videoId}`) {
-                    preview.classList.remove('hidden');
-                }
+            // 隐藏所有视频
+            document.querySelectorAll('.video-player').forEach(player => {
+                player.classList.remove('current');
             });
+            
+            // 显示选中的视频
+            document.getElementById(`player-${videoId}`).classList.add('current');
         });
     });
     
