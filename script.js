@@ -354,75 +354,100 @@ document.addEventListener('DOMContentLoaded', function() {
         startScanBtn.addEventListener('click', function() {
             // 显示验证状态
             document.querySelector('.verification-status').style.display = 'block';
-            document.querySelector('.status-message').textContent = '正在初始化摄像头...';
-            document.querySelector('.progress').style.width = '20%';
+            document.querySelector('.status-message').textContent = '正在请求摄像头权限...';
+            document.querySelector('.progress').style.width = '10%';
             
-            // 初始化QuaggaJS
-            Quagga.init({
-                inputStream: {
-                    name: "Live",
-                    type: "LiveStream",
-                    target: barcodeScanner,
-                    constraints: {
-                        width: 300,
-                        height: 200,
-                        facingMode: "environment"
-                    },
-                },
-                locator: {
-                    patchSize: "medium",
-                    halfSample: true
-                },
-                numOfWorkers: 2,
-                decoder: {
-                    readers: ["ean_reader", "ean_8_reader"]
-                },
-                locate: true
-            }, function(err) {
-                if (err) {
-                    console.error(err);
-                    document.querySelector('.status-message').textContent = '摄像头初始化失败，请检查权限';
+            // 先检查摄像头权限
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+                .then(function(stream) {
+                    // 权限获取成功
+                    document.querySelector('.status-message').textContent = '正在初始化摄像头...';
+                    document.querySelector('.progress').style.width = '20%';
+                    
+                    // 初始化QuaggaJS
+                    Quagga.init({
+                        inputStream: {
+                            name: "Live",
+                            type: "LiveStream",
+                            target: barcodeScanner,
+                            constraints: {
+                                width: 300,
+                                height: 200,
+                                facingMode: "environment"
+                            },
+                        },
+                        locator: {
+                            patchSize: "medium",
+                            halfSample: true
+                        },
+                        numOfWorkers: 2,
+                        decoder: {
+                            readers: ["ean_reader", "ean_8_reader"]
+                        },
+                        locate: true
+                    }, function(err) {
+                        if (err) {
+                            console.error(err);
+                            document.querySelector('.status-message').textContent = '摄像头初始化失败，请重试';
+                            document.querySelector('.status-icon i').classList.remove('fa-spinner', 'fa-spin');
+                            document.querySelector('.status-icon i').classList.add('fa-times-circle');
+                            document.querySelector('.status-icon i').style.color = '#e74c3c';
+                            return;
+                        }
+                        
+                        document.querySelector('.progress').style.width = '40%';
+                        document.querySelector('.status-message').textContent = '正在扫描条形码...';
+                        Quagga.start();
+                    });
+                    
+                    // 监听扫描结果
+                    Quagga.onDetected(function(result) {
+                        const code = result.codeResult.code;
+                        console.log("检测到条形码:", code);
+                        
+                        document.querySelector('.progress').style.width = '70%';
+                        document.querySelector('.status-message').textContent = '正在验证ISBN...';
+                        
+                        // 验证ISBN
+                        setTimeout(() => {
+                            if (code === "9787115667151") {
+                                // 停止扫描
+                                Quagga.stop();
+                                
+                                document.querySelector('.progress').style.width = '100%';
+                                document.querySelector('.status-icon i').classList.remove('fa-spinner', 'fa-spin');
+                                document.querySelector('.status-icon i').classList.add('fa-check-circle');
+                                document.querySelector('.status-message').textContent = '验证成功！';
+                                
+                                // 显示成功模态框
+                                setTimeout(() => {
+                                    resourceModal.style.display = 'none';
+                                    successModal.style.display = 'flex';
+                                    
+                                    // 设置验证状态到localStorage
+                                    localStorage.setItem('deepseekBookVerified', 'true');
+                                }, 1000);
+                            }
+                        }, 500);
+                    });
+                })
+                .catch(function(err) {
+                    console.error("摄像头权限获取失败:", err);
+                    document.querySelector('.progress').style.width = '0';
+                    document.querySelector('.status-message').textContent = '摄像头权限被拒绝，请选择其他验证方式';
                     document.querySelector('.status-icon i').classList.remove('fa-spinner', 'fa-spin');
                     document.querySelector('.status-icon i').classList.add('fa-times-circle');
                     document.querySelector('.status-icon i').style.color = '#e74c3c';
-                    return;
-                }
-                
-                document.querySelector('.progress').style.width = '40%';
-                document.querySelector('.status-message').textContent = '正在扫描条形码...';
-                Quagga.start();
-            });
-            
-            // 监听扫描结果
-            Quagga.onDetected(function(result) {
-                const code = result.codeResult.code;
-                console.log("检测到条形码:", code);
-                
-                document.querySelector('.progress').style.width = '70%';
-                document.querySelector('.status-message').textContent = '正在验证ISBN...';
-                
-                // 验证ISBN
-                setTimeout(() => {
-                    if (code === "9787115667151") {
-                        // 停止扫描
-                        Quagga.stop();
-                        
-                        document.querySelector('.progress').style.width = '100%';
-                        document.querySelector('.status-icon i').classList.remove('fa-spinner', 'fa-spin');
-                        document.querySelector('.status-icon i').classList.add('fa-check-circle');
-                        document.querySelector('.status-message').textContent = '验证成功！';
-                        
-                        // 显示成功模态框
-                        setTimeout(() => {
-                            resourceModal.style.display = 'none';
-                            successModal.style.display = 'flex';
-                            
-                            // 设置验证状态到localStorage
-                            localStorage.setItem('deepseekBookVerified', 'true');
-                        }, 1000);
-                    }
-                }, 500);
-            });
+                    
+                    // 显示权限提示
+                    showToast('请允许网站访问摄像头以进行条形码扫描');
+                    
+                    // 自动切换到上传图片验证方式
+                    setTimeout(() => {
+                        document.querySelector('.verification-status').style.display = 'none';
+                        document.querySelector('[data-method="upload"]').click();
+                    }, 2000);
+                });
         });
     }
     
