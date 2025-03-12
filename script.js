@@ -17,12 +17,28 @@ document.addEventListener('DOMContentLoaded', function() {
     const resourceModal = document.getElementById('resource-modal');
     const closeModal = document.querySelector('.close-modal');
     
-    resourceLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            resourceModal.style.display = 'flex';
+    // 检查是否已验证
+    const isVerified = localStorage.getItem('deepseekBookVerified') === 'true';
+    
+    // 如果已验证，移除链接的验证弹窗
+    if (isVerified) {
+        resourceLinks.forEach(link => {
+            // 移除原有的点击事件
+            const originalHref = link.getAttribute('href');
+            link.addEventListener('click', function(e) {
+                e.stopPropagation(); // 阻止事件冒泡
+                window.open(originalHref, '_blank');
+            });
         });
-    });
+    } else {
+        // 未验证时，点击资源链接弹出验证框
+        resourceLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                resourceModal.style.display = 'flex';
+            });
+        });
+    }
     
     closeModal.addEventListener('click', function() {
         resourceModal.style.display = 'none';
@@ -284,6 +300,277 @@ document.addEventListener('DOMContentLoaded', function() {
             
             particlesContainer.appendChild(particle);
         }
+    }
+    
+    // 资源获取按钮点击事件
+    const getResourcesBtn = document.getElementById('get-resources');
+    const successModal = document.getElementById('success-modal');
+    const closeBtns = document.querySelectorAll('.close-modal');
+    
+    if (getResourcesBtn) {
+        getResourcesBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (resourceModal) {
+                resourceModal.style.display = 'flex';
+            }
+        });
+    }
+    
+    // 关闭模态框
+    closeBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            resourceModal.style.display = 'none';
+            successModal.style.display = 'none';
+        });
+    });
+    
+    // 验证方式切换
+    const verificationTabs = document.querySelectorAll('.verification-tab');
+    const verificationMethods = document.querySelectorAll('.verification-method');
+    
+    verificationTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            // 移除所有标签的active类
+            verificationTabs.forEach(t => t.classList.remove('active'));
+            // 为当前标签添加active类
+            this.classList.add('active');
+            
+            // 获取验证方式
+            const method = this.getAttribute('data-method');
+            
+            // 隐藏所有验证方式
+            verificationMethods.forEach(m => m.classList.remove('active'));
+            
+            // 显示选中的验证方式
+            document.getElementById(`${method}-method`).classList.add('active');
+        });
+    });
+    
+    // 扫描条形码功能
+    const startScanBtn = document.getElementById('start-scan');
+    const barcodeScanner = document.getElementById('barcode-scanner');
+    
+    if (startScanBtn && barcodeScanner) {
+        startScanBtn.addEventListener('click', function() {
+            // 显示验证状态
+            document.querySelector('.verification-status').style.display = 'block';
+            document.querySelector('.status-message').textContent = '正在初始化摄像头...';
+            document.querySelector('.progress').style.width = '20%';
+            
+            // 初始化QuaggaJS
+            Quagga.init({
+                inputStream: {
+                    name: "Live",
+                    type: "LiveStream",
+                    target: barcodeScanner,
+                    constraints: {
+                        width: 300,
+                        height: 200,
+                        facingMode: "environment"
+                    },
+                },
+                locator: {
+                    patchSize: "medium",
+                    halfSample: true
+                },
+                numOfWorkers: 2,
+                decoder: {
+                    readers: ["ean_reader", "ean_8_reader"]
+                },
+                locate: true
+            }, function(err) {
+                if (err) {
+                    console.error(err);
+                    document.querySelector('.status-message').textContent = '摄像头初始化失败，请检查权限';
+                    document.querySelector('.status-icon i').classList.remove('fa-spinner', 'fa-spin');
+                    document.querySelector('.status-icon i').classList.add('fa-times-circle');
+                    document.querySelector('.status-icon i').style.color = '#e74c3c';
+                    return;
+                }
+                
+                document.querySelector('.progress').style.width = '40%';
+                document.querySelector('.status-message').textContent = '正在扫描条形码...';
+                Quagga.start();
+            });
+            
+            // 监听扫描结果
+            Quagga.onDetected(function(result) {
+                const code = result.codeResult.code;
+                console.log("检测到条形码:", code);
+                
+                document.querySelector('.progress').style.width = '70%';
+                document.querySelector('.status-message').textContent = '正在验证ISBN...';
+                
+                // 验证ISBN
+                setTimeout(() => {
+                    if (code === "9787115667151") {
+                        // 停止扫描
+                        Quagga.stop();
+                        
+                        document.querySelector('.progress').style.width = '100%';
+                        document.querySelector('.status-icon i').classList.remove('fa-spinner', 'fa-spin');
+                        document.querySelector('.status-icon i').classList.add('fa-check-circle');
+                        document.querySelector('.status-message').textContent = '验证成功！';
+                        
+                        // 显示成功模态框
+                        setTimeout(() => {
+                            resourceModal.style.display = 'none';
+                            successModal.style.display = 'flex';
+                            
+                            // 设置验证状态到localStorage
+                            localStorage.setItem('deepseekBookVerified', 'true');
+                        }, 1000);
+                    }
+                }, 500);
+            });
+        });
+    }
+    
+    // 上传条形码图片功能
+    const uploadArea = document.getElementById('upload-area');
+    const barcodeUpload = document.getElementById('barcode-upload');
+    const uploadPreview = document.getElementById('upload-preview');
+    const previewImage = document.getElementById('preview-image');
+    const processImageBtn = document.getElementById('process-image');
+    
+    if (uploadArea && barcodeUpload) {
+        uploadArea.addEventListener('click', function() {
+            barcodeUpload.click();
+        });
+        
+        barcodeUpload.addEventListener('change', function(e) {
+            if (e.target.files && e.target.files[0]) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    previewImage.src = e.target.result;
+                    uploadArea.style.display = 'none';
+                    uploadPreview.style.display = 'block';
+                }
+                
+                reader.readAsDataURL(e.target.files[0]);
+            }
+        });
+        
+        processImageBtn.addEventListener('click', function() {
+            // 显示验证状态
+            document.querySelector('.verification-status').style.display = 'block';
+            document.querySelector('.status-message').textContent = '正在处理图片...';
+            
+            // 模拟处理过程
+            setTimeout(() => {
+                document.querySelector('.status-message').textContent = '正在识别条形码...';
+                document.querySelector('.progress').style.width = '40%';
+                
+                setTimeout(() => {
+                    document.querySelector('.progress').style.width = '70%';
+                    document.querySelector('.status-message').textContent = '正在验证ISBN...';
+                    
+                    setTimeout(() => {
+                        document.querySelector('.progress').style.width = '100%';
+                        document.querySelector('.status-icon i').classList.remove('fa-spinner', 'fa-spin');
+                        document.querySelector('.status-icon i').classList.add('fa-check-circle');
+                        document.querySelector('.status-message').textContent = '验证成功！';
+                        
+                        // 显示成功模态框
+                        setTimeout(() => {
+                            resourceModal.style.display = 'none';
+                            successModal.style.display = 'flex';
+                        }, 1000);
+                    }, 1000);
+                }, 1500);
+            }, 1000);
+        });
+    }
+    
+    // 手动输入ISBN功能
+    const isbnInput = document.getElementById('isbn-input');
+    const verifyIsbnBtn = document.getElementById('verify-isbn');
+    
+    if (isbnInput && verifyIsbnBtn) {
+        // 自动格式化ISBN输入
+        isbnInput.addEventListener('input', function() {
+            let value = this.value.replace(/[^0-9]/g, '');
+            if (value.length > 13) {
+                value = value.substr(0, 13);
+            }
+            
+            // 添加连字符
+            if (value.length > 0) {
+                let formattedValue = '';
+                for (let i = 0; i < value.length; i++) {
+                    if (i === 3 || i === 4 || i === 9 || i === 12) {
+                        formattedValue += '-';
+                    }
+                    formattedValue += value[i];
+                }
+                this.value = formattedValue;
+            }
+        });
+        
+        verifyIsbnBtn.addEventListener('click', function() {
+            const isbn = isbnInput.value.replace(/[^0-9]/g, '');
+            
+            // 显示验证状态
+            document.querySelector('.verification-status').style.display = 'block';
+            document.querySelector('.status-message').textContent = '正在验证ISBN...';
+            document.querySelector('.progress').style.width = '50%';
+            
+            // 验证ISBN
+            setTimeout(() => {
+                if (isbn === '9787115667151') {
+                    document.querySelector('.progress').style.width = '100%';
+                    document.querySelector('.status-icon i').classList.remove('fa-spinner', 'fa-spin');
+                    document.querySelector('.status-icon i').classList.add('fa-check-circle');
+                    document.querySelector('.status-message').textContent = '验证成功！';
+                    
+                    // 显示成功模态框
+                    setTimeout(() => {
+                        resourceModal.style.display = 'none';
+                        successModal.style.display = 'flex';
+                    }, 1000);
+                } else {
+                    document.querySelector('.progress').style.width = '100%';
+                    document.querySelector('.status-icon i').classList.remove('fa-spinner', 'fa-spin');
+                    document.querySelector('.status-icon i').classList.add('fa-times-circle');
+                    document.querySelector('.status-icon i').style.color = '#e74c3c';
+                    document.querySelector('.status-message').textContent = 'ISBN无效，请重新输入';
+                    
+                    setTimeout(() => {
+                        document.querySelector('.verification-status').style.display = 'none';
+                        document.querySelector('.progress').style.width = '0';
+                        document.querySelector('.status-icon i').classList.remove('fa-times-circle');
+                        document.querySelector('.status-icon i').classList.add('fa-spinner', 'fa-spin');
+                        document.querySelector('.status-icon i').style.color = 'var(--primary-color)';
+                    }, 2000);
+                }
+            }, 1500);
+        });
+    }
+    
+    // 成功模态框按钮事件
+    const accessResourcesBtn = document.getElementById('access-resources');
+    const joinCommunityBtn = document.getElementById('join-community');
+    
+    if (accessResourcesBtn) {
+        accessResourcesBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            successModal.style.display = 'none';
+            
+            // 设置验证状态
+            localStorage.setItem('deepseekBookVerified', 'true');
+            
+            // 刷新页面以应用新的验证状态
+            window.location.reload();
+        });
+    }
+    
+    if (joinCommunityBtn) {
+        joinCommunityBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // 这里可以跳转到社区页面或者打开社区链接
+            window.open('https://ds.huasheng.ai/', '_blank');
+        });
     }
 });
 
