@@ -23,6 +23,81 @@
 
     <!-- QuaggaJS库 -->
     <script src="https://cdn.jsdelivr.net/npm/quagga@0.12.1/dist/quagga.min.js"></script>
+
+    <style>
+        .buy-options {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .buy-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            padding: 25px;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            width: 280px;
+        }
+
+        .buy-option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+        }
+
+        .store-logo {
+            height: 80px;
+            margin-bottom: 20px;
+            object-fit: contain;
+        }
+
+        .buy-details {
+            text-align: center;
+        }
+
+        .buy-details h3 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .buy-details p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .btn-buy {
+            display: inline-block;
+            background: linear-gradient(135deg, #3b82f6, #6366f1);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-buy:hover {
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+        }
+
+        @media (max-width: 768px) {
+            .buy-options {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .buy-option {
+                width: 100%;
+                max-width: 320px;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -400,26 +475,26 @@
     <section id="buy" class="buy">
         <div class="container">
             <h2 class="section-title">购买链接</h2>
-            <div class="buy-content">
-                <p class="buy-intro">《一本书玩转DeepSeek》现已上市，您可以通过以下渠道购买：</p>
-                <div class="store-grid">
-                    <a href="https://item.jd.com/deepseek-book" target="_blank" class="store-card">
-                        <img src="jd.png" alt="京东">
-                        <span>京东</span>
-                    </a>
-                    <a href="https://detail.tmall.com/deepseek-book" target="_blank" class="store-card">
-                        <img src="tmall.png" alt="天猫">
-                        <span>天猫</span>
-                    </a>
-                    <a href="https://product.dangdang.com/deepseek-book" target="_blank" class="store-card">
-                        <img src="dangdang.png" alt="当当">
-                        <span>当当</span>
-                    </a>
-                    <a href="https://www.amazon.cn/deepseek-book" target="_blank" class="store-card">
-                        <img src="amazon.png" alt="亚马逊">
-                        <span>亚马逊</span>
-                    </a>
-                </div>
+            <p class="buy-intro">选择您喜欢的平台购买《一本书玩转DeepSeek》</p>
+            
+            <div class="buy-options">
+                <a href="https://item.jd.com/10142013181435.html" target="_blank" class="buy-option">
+                    <img src="jd2.png" alt="京东" class="store-logo">
+                    <div class="buy-details">
+                        <h3>京东</h3>
+                        <p>京东自营，多快好省</p>
+                        <span class="btn-buy">立即购买</span>
+                    </div>
+                </a>
+                
+                <a href="https://product.dangdang.com/11920396474.html" target="_blank" class="buy-option">
+                    <img src="Dangdang_logo.png" alt="当当" class="store-logo">
+                    <div class="buy-details">
+                        <h3>当当</h3>
+                        <p>正版图书，品质保障</p>
+                        <span class="btn-buy">立即购买</span>
+                    </div>
+                </a>
             </div>
         </div>
     </section>

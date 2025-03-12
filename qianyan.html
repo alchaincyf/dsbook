@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一本书玩转DeepSeek - 前言</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3b82f6;
+            --secondary-color: #6366f1;
+            --gradient-primary: linear-gradient(135deg, #3b82f6, #6366f1);
+            --text-color: #333;
+            --background-color: #f8fafc;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+        }
+        
+        .foreword-container {
+            max-width: 800px;
+            margin: 40px auto 60px;
+            padding: 0 20px;
+            line-height: 1.8;
+            color: #333;
+            font-size: 16px;
+        }
+        
+        .foreword-title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+        }
+        
+        .foreword-content {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .foreword-content p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        .foreword-content h2 {
+            font-size: 22px;
+            margin: 30px 0 15px;
+            color: var(--primary-color);
+        }
+        
+        .foreword-content h3 {
+            font-size: 18px;
+            margin: 25px 0 15px;
+            color: var(--secondary-color);
+        }
+        
+        .foreword-content ul {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+        
+        .foreword-content ul li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 15px;
+            list-style-type: none;
+        }
+        
+        .foreword-content ul li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+        }
+        
+        .foreword-signature {
+            text-align: right;
+            margin-top: 40px;
+            font-style: italic;
+        }
+        
+        .back-to-home {
+            display: inline-block;
+            margin: 30px 0;
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .back-to-home:hover {
+            color: var(--secondary-color);
+            transform: translateX(-5px);
+        }
+        
+        .back-to-home i {
+            margin-right: 5px;
+        }
+        
+        @media print {
+            .back-to-home {
+                display: none;
+            }
+        }
+        
+        /* 微信公众号友好样式 */
+        .wechat-friendly {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .wechat-friendly h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #666;
+        }
+        
+        /* 微信公众号专用样式 */
+        .wechat-content {
+            background-color: white;
+            padding: 15px;
+            border: 1px solid #eaeaea;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            white-space: pre-wrap;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        
+        /* 微信公众号专用样式 - 标题 */
+        .mp-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #3b82f6;
+        }
+        
+        /* 微信公众号专用样式 - 二级标题 */
+        .mp-h2 {
+            font-size: 20px;
+            font-weight: bold;
+            color: #3b82f6;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eaeaea;
+            padding-bottom: 5px;
+        }
+        
+        /* 微信公众号专用样式 - 三级标题 */
+        .mp-h3 {
+            font-size: 18px;
+            font-weight: bold;
+            color: #6366f1;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        
+        /* 微信公众号专用样式 - 列表项 */
+        .mp-list-item {
+            margin: 10px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .mp-list-item:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+        }
+        
+        /* 微信公众号专用样式 - 段落 */
+        .mp-paragraph {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        /* 复制按钮样式 */
+        .copy-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+            border: none;
+        }
+        
+        .copy-btn:hover {
+            background: linear-gradient(135deg, #1d4ed8, #4338ca);
+        }
+        
+        .copy-success {
+            display: none;
+            color: #10b981;
+            margin-left: 10px;
+            font-size: 14px;
+        }
+        
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            .foreword-content {
+                padding: 25px;
+            }
+            
+            .foreword-title {
+                font-size: 24px;
+            }
+            
+            .foreword-content h2 {
+                font-size: 20px;
+            }
+            
+            .foreword-content h3 {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="foreword-container">
+        <a href="index.html" class="back-to-home"><i class="fas fa-arrow-left"></i> 返回首页</a>
+        
+        <div class="foreword-content">
+            <h1 class="foreword-title">前言</h1>
+            
+            <p>2025 年 1 月 20 日，DeepSeek R1 发布。</p>
+            
+            <p>短短几周内，它的 API 已经嵌入全球主流云厂商，用户数破亿，增长速度超越了 ChatGPT。这一迅猛发展不仅导致 NVIDIA 股价大幅下挫，还引发了硅谷投资者的广泛震惊，并促使美国政府重新审视 AI 产业的整体格局。</p>
+            
+            <p>这不是一款普通的 AI 产品，而是一个真正意义上的"DeepSeek 时刻"。</p>
+            
+            <p>当 ChatGPT 横空出世时，我们以为 AI 已经足够强大，但 DeepSeek 让我们意识到，AI 其实可以更便宜、更开放、更强大，甚至引发一场基础设施革命。</p>
+            
+            <p>它的影响远超 AI 圈，甚至波及整个社会结构。</p>
+            
+            <ul>
+                <li>许多人在 AI 的帮助下提升了生产力，收入翻倍，开启了职业生涯的全新篇章。</li>
+                <li>也有人因此感受到前所未有的焦虑，害怕自己被淘汰，担心这场变革自己无法跟上。</li>
+                <li>还有人试图回避这场浪潮，却发现 AI 已经无处不在，无论是工作还是学习，甚至是娱乐方式，都在悄悄发生变化。</li>
+            </ul>
+            
+            <p>作为 AI 时代的受益者，我既亲眼见证了它带来的巨大机会，也感受到了身边人的恐慌与迷茫。</p>
+            
+            <p>我相信，每个人都有必要学习 AI，但问题是，该从何学起？</p>
+            
+            <p>这本书，就是为了解决这个问题。</p>
+            
+            <h2>作者是谁？</h2>
+            
+            <p>我将自己视为这波 AI 浪潮中受益的幸运儿，在 2022 年 11 月 30 日 ChatGPT 发布之后，还在互联网大厂上班的我就开始尝试使用了。当时印象很深刻的一个场景是，我们正在策划一个产品的营销活动方案，我向 ChatGPT 详细描述了当前的市场竞争环境，并明确了我们的目标。令人惊叹的是，ChatGPT 在几分钟内生成的内容，竟跟我们团队四五个人花费 2 小时讨论得出的营销方案非常接近。虽然结果不能 100% 直接应用，但是这个过程中提供的启发十足，我非常震撼。</p>
+            
+            <p>于是，带着未来 10 年的工作将和 AI 有关的预期，我从大厂裸辞，开始了一段完全不同的生活。</p>
+            
+            <p>那时候，我对 AI 充满兴趣，但和大多数人一样，不会写代码，不懂模型训练，也不知道如何真正利用 AI 赚钱。</p>
+            
+            <p>但我做了一件简单的事情：开始尝试。</p>
+            
+            <p>最初，我在社交媒体上分享自己的 AI 学习笔记，整理 ChatGPT 使用技巧，试图通过不断学习和分享的方式去摸索 AI 时代的独立创造模式。</p>
+            
+            <p>我先是在自媒体渠道和企业培训领域获得了许多正反馈，我经营的 B 站和 YouTube 频道"AI 进化论 - 花生"已经分别有 11 万 + 和 5 万 + 的粉丝数。</p>
+            
+            <p>然后，更超出预期的是，借助 AI 赋予的能力，从没写过代码、毫无开发经验的我，去年在 AI 编程工具的帮助下，竟然成功开发出了 iOS 应用"小猫补光灯 Pro"，并意外登顶中国区 App Store 付费总榜。在 AI 时代到来之前，我从未想过这会是一件跟我有关的事，这是一个个体就能做到的事。</p>
+            
+            <p>但 AI 让一切变得不同。</p>
+            
+            <p>它降低了门槛，让我这样一个"不会代码的产品人"也能独立创造产品、验证需求，并在 AI 时代找到属于自己的增长路径。</p>
+            
+            <p>这两年，我尝试过不同的 AI 工具，参与过 AI 时代的各种实践，从用 AI 辅助写作、编程、营销，到做 AI 产品、开设教程、帮助他人理解 AI。我深刻感受到 AI 对个体创造力的释放，也见证了 AI 在各个行业带来的剧烈变化。</p>
+            
+            <p>更重要的是，我发现，AI 时代，不只是少数技术精英的时代，它是属于所有人的时代。</p>
+            
+            <p>但大多数人依然对 AI 充满疑惑：</p>
+            
+            <p>"AI 真的会替代我们吗？"</p>
+            
+            <p>"我不会编程，能用 AI 做什么？"</p>
+            
+            <p>"AI 发展这么快，我该怎么学习？"</p>
+            
+            <p>这些问题，不只是你的困惑，也是我写这本书的理由。</p>
+            
+            <p>我不是 AI 科学家，也不是技术精英，我只是 AI 时代的一个学习者、实践者。正因如此，我知道普通人真正需要的是什么。</p>
+            
+            <p>你不需要成为 AI 专家，也不需要掌握复杂的技术，只要学会正确的方法，AI 就能成为你的工作助手、学习伙伴，甚至是你创造新机会的跳板。</p>
+            
+            <p>我写这本书，只是想告诉你：AI 时代，你完全可以站在浪潮之上，而不是被潮水冲走。</p>
+            
+            <h2>本书写给谁？</h2>
+            
+            <p>首先，本书是写给普通人的。</p>
+            
+            <p>你不需要有编程背景，不需要懂 AI 算法，也不需要是科技圈的从业者。只要你愿意花一点儿时间，按照书中的方法去实践，你就能真正把 AI 用起来，而不仅仅是觉得它看起来很厉害。</p>
+            
+            <p>其次，本书也写给焦虑中的人。</p>
+            
+            <p>AI 发展迅猛，信息爆炸式增长，工具更新换代的速度令人应接不暇。你可能已经听过太多"AI 会让你失业"的论调，但本书的核心观点是：如果你愿意学习，AI 将会成为你的助力器，而不是替代品。</p>
+            
+            <p>同时，本书也写给企业管理者、自由职业者、学生、创作者……</p>
+            
+            <p>无论你是希望用 AI 提升工作效率、优化学习方式，还是想借助 AI 开启一份副业，本书都会提供切实可行的方案。</p>
+            
+            <p>AI 不是一场只有程序员能参与的游戏，而是一场属于所有人的变革。</p>
+            
+            <h2>本书讲什么？</h2>
+            
+            <p>如果你只想学"怎么用 AI"，大部分 AI 工具的教程都能教你。但本书的目标不只是教你"用 AI"，更是教你如何"思考 AI"，如何理解它的本质，如何真正让它为你所用。</p>
+            
+            <p>全书共分三个部分。</p>
+            
+            <h3>第一部分：AI 革命的本质</h3>
+            
+            <ul>
+                <li>DeepSeek 为什么是一个"AI 时刻"？</li>
+                <li>它与 OpenAI、Anthropic 等的不同之处是什么？</li>
+                <li>AI 是如何思考的？它真的懂我们吗？</li>
+            </ul>
+            
+            <h3>第二部分：如何高效使用 DeepSeek</h3>
+            
+            <ul>
+                <li>DeepSeek R1 的核心能力解析。</li>
+                <li>如何通过提示词让 AI 输出更高质量的内容？</li>
+                <li>AI 如何成为你的工作搭档？（营销、写作……）</li>
+                <li>AI 如何帮助你学习？（阅读、写文章……）</li>
+            </ul>
+            
+            <h3>第三部分：AI 进阶玩法</h3>
+            
+            <ul>
+                <li>DeepSeek + Kimi 生成 PPT，DeepSeek + Xmind 生成思维导图，DeepSeek + 剪映生成短视频……</li>
+                <li>如何在本地部署 DeepSeek？</li>
+                <li>如何调用 DeepSeek API 实现自动化工作？</li>
+            </ul>
+            
+            <p>这本书并非枯燥的工具说明书，而是一本真正能帮你打开 AI 视野的指南。</p>
+            
+            <p>我们不仅会探讨如何操作 AI，还会深入探讨 AI 的思维方式，以及如何让 AI 真正与你协作，而不仅仅是"替代"你。</p>
+            
+            <p>会用 AI 只是第一步，我们的终极目标，是让 AI 放大你的能力，成为你的一部分。</p>
+            
+            <h2>本书的"隐形价值"</h2>
+            
+            <p>AI 的进化速度远超任何一本书的更新速度。DeepSeek 从 R1 到 R2 再到 R3 可能只需要几个月，未来的新功能、新玩法层出不穷，而一本书却无法做到实时更新。</p>
+            
+            <p>所以，本书不仅仅是一本书，它更是一扇门。</p>
+            
+            <p>在阅读本书的过程中，你还可以获取更多的延伸资源。</p>
+            
+            <ul>
+                <li>视频教程：针对不同场景的 DeepSeek 玩法，我会录制更直观的操作视频。</li>
+                <li>实时更新的图文教程：书中提到的 AI 工具一旦有重要更新，我就会在我的公众号"花叔"同步更新相关的使用指南。</li>
+                <li>社区讨论：我会在公众号定期回答大家的 AI 相关问题，分享最新的 AI 资讯。</li>
+            </ul>
+            
+            <p>如果你希望获取这些资源，可以在微信公众号搜索"花叔"，我会在其中持续分享与 AI 相关的最新实践经验，帮助你保持领先。</p>
+            
+            <h2>致谢</h2>
+            
+            <p>写这本书，不只是一个人完成的事。感谢一直在我身边给予我充分陪伴和支持，同时也是"小猫补光灯"产品启发者的锐锐。感谢我的编辑王军花老师，是她的鼓励和信任让这本书的内容得以成形和出版。</p>
+            
+            <p>感谢 DeepSeek 这家公司，让我在 2025 年这个 AI 变革的关键时刻，有机会见证一个属于开源 AI 的全新时代。</p>
+            
+            <p>感谢所有曾在 AI 领域不断探索的人，无论是开发者、产品经理，还是那些愿意第一时间尝试 AI 工具的普通人，你们的反馈、使用习惯，甚至是吐槽，都是 AI 发展的推动力。</p>
+            
+            <p>感谢读到这里的你。</p>
+            
+            <p>无论你是出于好奇、焦虑，还是单纯想"摸摸 AI 的底"，只要你愿意开始这段旅程，就已经比 99% 的人走得更远。</p>
+            
+            <p>世界正在被 AI 重塑，而你完全可以站在这个变革的中心。</p>
+            
+            <p>愿这本书能帮你迈出第一步。</p>
+            
+            <div class="wechat-friendly">
+                <h3>微信公众号适配版本（点击下方按钮复制后可直接粘贴到公众号）</h3>
+                <div class="wechat-content" id="wechat-copy-content">
+<section class="mp-title">前言</section>
+
+<section class="mp-paragraph">2025 年 1 月 20 日，DeepSeek R1 发布。</section>
+
+<section class="mp-paragraph">短短几周内，它的 API 已经嵌入全球主流云厂商，用户数破亿，增长速度超越了 ChatGPT。这一迅猛发展不仅导致 NVIDIA 股价大幅下挫，还引发了硅谷投资者的广泛震惊，并促使美国政府重新审视 AI 产业的整体格局。</section>
+
+<section class="mp-paragraph">这不是一款普通的 AI 产品，而是一个真正意义上的"DeepSeek 时刻"。</section>
+
+<section class="mp-paragraph">当 ChatGPT 横空出世时，我们以为 AI 已经足够强大，但 DeepSeek 让我们意识到，AI 其实可以更便宜、更开放、更强大，甚至引发一场基础设施革命。</section>
+
+<section class="mp-paragraph">它的影响远超 AI 圈，甚至波及整个社会结构。</section>
+
+<section>
+<section class="mp-list-item">许多人在 AI 的帮助下提升了生产力，收入翻倍，开启了职业生涯的全新篇章。</section>
+<section class="mp-list-item">也有人因此感受到前所未有的焦虑，害怕自己被淘汰，担心这场变革自己无法跟上。</section>
+<section class="mp-list-item">还有人试图回避这场浪潮，却发现 AI 已经无处不在，无论是工作还是学习，甚至是娱乐方式，都在悄悄发生变化。</section>
+</section>
+
+<section class="mp-paragraph">作为 AI 时代的受益者，我既亲眼见证了它带来的巨大机会，也感受到了身边人的恐慌与迷茫。</section>
+
+<section class="mp-paragraph">我相信，每个人都有必要学习 AI，但问题是，该从何学起？</section>
+
+<section class="mp-paragraph">这本书，就是为了解决这个问题。</section>
+
+<section class="mp-h2">作者是谁？</section>
+
+<section class="mp-paragraph">我将自己视为这波 AI 浪潮中受益的幸运儿，在 2022 年 11 月 30 日 ChatGPT 发布之后，还在互联网大厂上班的我就开始尝试使用了。当时印象很深刻的一个场景是，我们正在策划一个产品的营销活动方案，我向 ChatGPT 详细描述了当前的市场竞争环境，并明确了我们的目标。令人惊叹的是，ChatGPT 在几分钟内生成的内容，竟跟我们团队四五个人花费 2 小时讨论得出的营销方案非常接近。虽然结果不能 100% 直接应用，但是这个过程中提供的启发十足，我非常震撼。</section>
+
+<section class="mp-paragraph">于是，带着未来 10 年的工作将和 AI 有关的预期，我从大厂裸辞，开始了一段完全不同的生活。</section>
+
+<section class="mp-paragraph">那时候，我对 AI 充满兴趣，但和大多数人一样，不会写代码，不懂模型训练，也不知道如何真正利用 AI 赚钱。</section>
+
+<section class="mp-paragraph">但我做了一件简单的事情：开始尝试。</section>
+
+<section class="mp-paragraph">最初，我在社交媒体上分享自己的 AI 学习笔记，整理 ChatGPT 使用技巧，试图通过不断学习和分享的方式去摸索 AI 时代的独立创造模式。</section>
+
+<section class="mp-paragraph">我先是在自媒体渠道和企业培训领域获得了许多正反馈，我经营的 B 站和 YouTube 频道"AI 进化论 - 花生"已经分别有 11 万 + 和 5 万 + 的粉丝数。</section>
+
+<section class="mp-paragraph">然后，更超出预期的是，借助 AI 赋予的能力，从没写过代码、毫无开发经验的我，去年在 AI 编程工具的帮助下，竟然成功开发出了 iOS 应用"小猫补光灯 Pro"，并意外登顶中国区 App Store 付费总榜。在 AI 时代到来之前，我从未想过这会是一件跟我有关的事，这是一个个体就能做到的事。</section>
+
+<section class="mp-paragraph">但 AI 让一切变得不同。</section>
+
+<section class="mp-paragraph">它降低了门槛，让我这样一个"不会代码的产品人"也能独立创造产品、验证需求，并在 AI 时代找到属于自己的增长路径。</section>
+
+<section class="mp-paragraph">这两年，我尝试过不同的 AI 工具，参与过 AI 时代的各种实践，从用 AI 辅助写作、编程、营销，到做 AI 产品、开设教程、帮助他人理解 AI。我深刻感受到 AI 对个体创造力的释放，也见证了 AI 在各个行业带来的剧烈变化。</section>
+
+<section class="mp-paragraph">更重要的是，我发现，AI 时代，不只是少数技术精英的时代，它是属于所有人的时代。</section>
+
+<section class="mp-paragraph">但大多数人依然对 AI 充满疑惑：</section>
+
+<section class="mp-paragraph">"AI 真的会替代我们吗？"</section>
+
+<section class="mp-paragraph">"我不会编程，能用 AI 做什么？"</section>
+
+<section class="mp-paragraph">"AI 发展这么快，我该怎么学习？"</section>
+
+<section class="mp-paragraph">这些问题，不只是你的困惑，也是我写这本书的理由。</section>
+
+<section class="mp-paragraph">我不是 AI 科学家，也不是技术精英，我只是 AI 时代的一个学习者、实践者。正因如此，我知道普通人真正需要的是什么。</section>
+
+<section class="mp-paragraph">你不需要成为 AI 专家，也不需要掌握复杂的技术，只要学会正确的方法，AI 就能成为你的工作助手、学习伙伴，甚至是你创造新机会的跳板。</section>
+
+<section class="mp-paragraph">我写这本书，只是想告诉你：AI 时代，你完全可以站在浪潮之上，而不是被潮水冲走。</section>
+
+<section class="mp-h2">本书写给谁？</section>
+
+<section class="mp-paragraph">首先，本书是写给普通人的。</section>
+
+<section class="mp-paragraph">你不需要有编程背景，不需要懂 AI 算法，也不需要是科技圈的从业者。只要你愿意花一点儿时间，按照书中的方法去实践，你就能真正把 AI 用起来，而不仅仅是觉得它看起来很厉害。</section>
+
+<section class="mp-paragraph">其次，本书也写给焦虑中的人。</section>
+
+<section class="mp-paragraph">AI 发展迅猛，信息爆炸式增长，工具更新换代的速度令人应接不暇。你可能已经听过太多"AI 会让你失业"的论调，但本书的核心观点是：如果你愿意学习，AI 将会成为你的助力器，而不是替代品。</section>
+
+<section class="mp-paragraph">同时，本书也写给企业管理者、自由职业者、学生、创作者……</section>
+
+<section class="mp-paragraph">无论你是希望用 AI 提升工作效率、优化学习方式，还是想借助 AI 开启一份副业，本书都会提供切实可行的方案。</section>
+
+<section class="mp-paragraph">AI 不是一场只有程序员能参与的游戏，而是一场属于所有人的变革。</section>
+
+<section class="mp-h2">本书讲什么？</section>
+
+<section class="mp-paragraph">如果你只想学"怎么用 AI"，大部分 AI 工具的教程都能教你。但本书的目标不只是教你"用 AI"，更是教你如何"思考 AI"，如何理解它的本质，如何真正让它为你所用。</section>
+
+<section class="mp-paragraph">全书共分三个部分。</section>
+
+<section class="mp-h3">第一部分：AI 革命的本质</section>
+
+<section>
+<section class="mp-list-item">DeepSeek 为什么是一个"AI 时刻"？</section>
+<section class="mp-list-item">它与 OpenAI、Anthropic 等的不同之处是什么？</section>
+<section class="mp-list-item">AI 是如何思考的？它真的懂我们吗？</section>
+</section>
+
+<section class="mp-h3">第二部分：如何高效使用 DeepSeek</section>
+
+<section>
+<section class="mp-list-item">DeepSeek R1 的核心能力解析。</section>
+<section class="mp-list-item">如何通过提示词让 AI 输出更高质量的内容？</section>
+<section class="mp-list-item">AI 如何成为你的工作搭档？（营销、写作……）</section>
+<section class="mp-list-item">AI 如何帮助你学习？（阅读、写文章……）</section>
+</section>
+
+<section class="mp-h3">第三部分：AI 进阶玩法</section>
+
+<section>
+<section class="mp-list-item">DeepSeek + Kimi 生成 PPT，DeepSeek + Xmind 生成思维导图，DeepSeek + 剪映生成短视频……</section>
+<section class="mp-list-item">如何在本地部署 DeepSeek？</section>
+<section class="mp-list-item">如何调用 DeepSeek API 实现自动化工作？</section>
+</section>
+
+<section class="mp-paragraph">这本书并非枯燥的工具说明书，而是一本真正能帮你打开 AI 视野的指南。</section>
+
+<section class="mp-paragraph">我们不仅会探讨如何操作 AI，还会深入探讨 AI 的思维方式，以及如何让 AI 真正与你协作，而不仅仅是"替代"你。</section>
+
+<section class="mp-paragraph">会用 AI 只是第一步，我们的终极目标，是让 AI 放大你的能力，成为你的一部分。</section>
+
+<section class="mp-h2">本书的"隐形价值"</section>
+
+<section class="mp-paragraph">AI 的进化速度远超任何一本书的更新速度。DeepSeek 从 R1 到 R2 再到 R3 可能只需要几个月，未来的新功能、新玩法层出不穷，而一本书却无法做到实时更新。</section>
+
+<section class="mp-paragraph">所以，本书不仅仅是一本书，它更是一扇门。</section>
+
+<section class="mp-paragraph">在阅读本书的过程中，你还可以获取更多的延伸资源。</section>
+
+<section>
+<section class="mp-list-item">视频教程：针对不同场景的 DeepSeek 玩法，我会录制更直观的操作视频。</section>
+<section class="mp-list-item">实时更新的图文教程：书中提到的 AI 工具一旦有重要更新，我就会在我的公众号"花叔"同步更新相关的使用指南。</section>
+<section class="mp-list-item">社区讨论：我会在公众号定期回答大家的 AI 相关问题，分享最新的 AI 资讯。</section>
+</section>
+
+<section class="mp-paragraph">如果你希望获取这些资源，可以在微信公众号搜索"花叔"，我会在其中持续分享与 AI 相关的最新实践经验，帮助你保持领先。</section>
+
+<section class="mp-h2">致谢</section>
+
+<section class="mp-paragraph">写这本书，不只是一个人完成的事。感谢一直在我身边给予我充分陪伴和支持，同时也是"小猫补光灯"产品启发者的锐锐。感谢我的编辑王军花老师，是她的鼓励和信任让这本书的内容得以成形和出版。</section>
+
+<section class="mp-paragraph">感谢 DeepSeek 这家公司，让我在 2025 年这个 AI 变革的关键时刻，有机会见证一个属于开源 AI 的全新时代。</section>
+
+<section class="mp-paragraph">感谢所有曾在 AI 领域不断探索的人，无论是开发者、产品经理，还是那些愿意第一时间尝试 AI 工具的普通人，你们的反馈、使用习惯，甚至是吐槽，都是 AI 发展的推动力。</section>
+
+<section class="mp-paragraph">感谢读到这里的你。</section>
+
+<section class="mp-paragraph">无论你是出于好奇、焦虑，还是单纯想"摸摸 AI 的底"，只要你愿意开始这段旅程，就已经比 99% 的人走得更远。</section>
+
+<section class="mp-paragraph">世界正在被 AI 重塑，而你完全可以站在这个变革的中心。</section>
+
+<section class="mp-paragraph">愿这本书能帮你迈出第一步。</section>
+
+<section style="text-align: right; font-style: italic; margin-top: 30px;">
+<section>陈云飞（@ 花生）</section>
+<section>2025 年 2 月 27 日</section>
+</section>
+                </div>
+                <button class="copy-btn" id="copy-wechat-btn">复制微信公众号格式内容</button>
+                <span class="copy-success" id="copy-success-msg">复制成功！</span>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 检查页面是否正确加载
+            console.log('页面已加载完成');
+            
+            // 添加复制功能
+            document.getElementById('copy-wechat-btn').addEventListener('click', function() {
+                const content = document.getElementById('wechat-copy-content');
+                const range = document.createRange();
+                range.selectNode(content);
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(range);
+                document.execCommand('copy');
+                window.getSelection().removeAllRanges();
+                
+                // 显示复制成功提示
+                const successMsg = document.getElementById('copy-success-msg');
+                successMsg.style.display = 'inline';
+                setTimeout(function() {
+                    successMsg.style.display = 'none';
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>
