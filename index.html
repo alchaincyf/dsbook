@@ -97,6 +97,58 @@
                 margin-bottom: 20px;
             }
         }
+
+        .video-player {
+            display: none;
+            width: 100%;
+        }
+
+        .video-player.current {
+            display: block;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            background: #f5f5f5;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .video-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .video-tab {
+            padding: 10px 20px;
+            border: none;
+            background: #f5f5f5;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .video-tab.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .video-info {
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .video-tabs {
+                flex-direction: column;
+            }
+            
+            .video-tab {
+                width: 100%;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -406,7 +458,7 @@
     <section id="resources" class="resources">
         <div class="container">
             <h2 class="section-title">电子资源</h2>
-            <p class="resources-intro">购买本书后，您将获得以下专属电子资源，助您更快掌握DeepSeek的使用技巧</p>
+            <p class="resources-intro">本书配套以下专属电子资源，助您更快掌握DeepSeek的使用技巧</p>
             
             <div class="resources-grid">
                 <!-- 第一类资源：视频课程 -->
@@ -463,11 +515,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="resources-cta">
-                <p>购买本书即可获取以上所有资源的访问权限</p>
-                <a href="#" class="resource-link btn primary" id="get-resources">获取资源</a>
             </div>
         </div>
     </section>
@@ -571,7 +618,7 @@
             <!-- 视频播放区域 -->
             <div class="video-container">
                 <div class="video-player current" id="player-BV1UZFfeMEvd">
-                    <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=113927614633917&bvid=BV1UZFfeMEvd&cid=28173010291&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                    <div class="video-placeholder" data-bvid="BV1UZFfeMEvd"></div>
                     <div class="video-info">
                         <h3>19大DeepSeek使用技巧</h3>
                         <p>本视频详细介绍了DeepSeek的高级应用技巧，帮助你快速掌握AI工具的使用方法，从零基础到实际应用。</p>
@@ -579,7 +626,7 @@
                 </div>
                 
                 <div class="video-player" id="player-BV1C8fCYEEd4">
-                    <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=113896576849029&bvid=BV1C8fCYEEd4&cid=28102887711&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                    <div class="video-placeholder" data-bvid="BV1C8fCYEEd4"></div>
                     <div class="video-info">
                         <h3>DeepSeek七大真实使用场景</h3>
                         <p>探索DeepSeek在实际工作和生活中的七大应用场景，让AI成为你的得力助手，提升工作效率。</p>
@@ -587,7 +634,7 @@
                 </div>
                 
                 <div class="video-player" id="player-BV1QV9cYhEXq">
-                    <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114075354799873&bvid=BV1QV9cYhEXq&cid=28602993653&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                    <div class="video-placeholder" data-bvid="BV1QV9cYhEXq"></div>
                     <div class="video-info">
                         <h3>六种满血DeepSeek替代方案</h3>
                         <p>介绍六种可以替代DeepSeek的AI工具，帮助你在不同场景下选择最适合的AI助手。</p>
@@ -595,7 +642,7 @@
                 </div>
                 
                 <div class="video-player" id="player-BV1QUAnerEMA">
-                    <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114035559305744&bvid=BV1QUAnerEMA&cid=28487780013&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                    <div class="video-placeholder" data-bvid="BV1QUAnerEMA"></div>
                     <div class="video-info">
                         <h3>6个提前下班的DeepSeek秘诀</h3>
                         <p>掌握这6个DeepSeek使用秘诀，让你的工作效率大幅提升，轻松提前下班。</p>
@@ -603,7 +650,7 @@
                 </div>
                 
                 <div class="video-player" id="player-BV1uMPmemE3r">
-                    <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=113952948228097&bvid=BV1uMPmemE3r&cid=28237826016&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                    <div class="video-placeholder" data-bvid="BV1uMPmemE3r"></div>
                     <div class="video-info">
                         <h3>DeepSeek API应用开发</h3>
                         <p>学习如何使用DeepSeek的API进行应用开发，打造属于自己的AI工具，实现工作流程自动化。</p>
@@ -661,107 +708,73 @@
         </div>
     </footer>
 
-    <!-- 修改资源模态框 -->
-    <div id="resource-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2>资源验证</h2>
-            <p class="modal-desc">请使用以下方式验证您的图书，解锁全部电子资源</p>
-            
-            <div class="verification-methods">
-                <div class="verification-tabs">
-                    <button class="verification-tab active" data-method="barcode">扫描条形码</button>
-                    <button class="verification-tab" data-method="upload">上传条形码图片</button>
-                    <button class="verification-tab" data-method="manual">手动输入ISBN</button>
-                </div>
-                
-                <div class="verification-content">
-                    <!-- 扫描条形码 -->
-                    <div class="verification-method active" id="barcode-method">
-                        <div class="scanner-container">
-                            <div class="scanner-frame">
-                                <div class="scanner-line"></div>
-                                <video id="barcode-scanner" autoplay playsinline></video>
-                            </div>
-                            <div class="scanner-instructions">
-                                <p>请将书籍背面的条形码对准摄像头</p>
-                                <button id="start-scan" class="btn primary">开始扫描</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 上传条形码图片 -->
-                    <div class="verification-method" id="upload-method">
-                        <div class="upload-container">
-                            <div class="upload-area" id="upload-area">
-                                <i class="fas fa-cloud-upload-alt"></i>
-                                <p>点击或拖拽上传条形码图片</p>
-                                <input type="file" id="barcode-upload" accept="image/*" hidden>
-                            </div>
-                            <div class="upload-preview" id="upload-preview">
-                                <img id="preview-image" src="" alt="预览图">
-                                <button id="process-image" class="btn primary">识别条形码</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 手动输入ISBN -->
-                    <div class="verification-method" id="manual-method">
-                        <div class="manual-container">
-                            <p>请输入书籍背面的ISBN号码</p>
-                            <div class="isbn-input-container">
-                                <input type="text" id="isbn-input" placeholder="例如: 978-7-115-66715-1" maxlength="17">
-                                <button id="verify-isbn" class="btn primary">验证</button>
-                            </div>
-                            <div class="isbn-hint">
-                                <i class="fas fa-info-circle"></i>
-                                <span>ISBN位于书籍背面条形码上方，格式为978-7-115-XXXXX-X</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="verification-status">
-                <div class="status-indicator">
-                    <div class="status-icon">
-                        <i class="fas fa-spinner fa-spin"></i>
-                    </div>
-                    <div class="status-message">准备验证...</div>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 验证成功模态框 -->
-    <div id="success-modal" class="modal">
-        <div class="modal-content success-content">
-            <span class="close-modal">&times;</span>
-            <div class="success-animation">
-                <div class="checkmark-circle">
-                    <div class="checkmark draw"></div>
-                </div>
-            </div>
-            <h2>验证成功！</h2>
-            <p>恭喜您成功验证《一本书玩转DeepSeek》</p>
-            <div class="resources-unlocked">
-                <h3>已解锁以下资源：</h3>
-                <ul class="unlocked-list">
-                    <li><i class="fas fa-video"></i> DeepSeek使用技巧与场景应用视频课程</li>
-                    <li><i class="fas fa-globe"></i> 专属DeepSeek对话与文章改写网站</li>
-                    <li><i class="fas fa-code"></i> DeepSeek实用API评测和调用指南</li>
-                </ul>
-            </div>
-            <div class="success-actions">
-                <a href="#" id="access-resources" class="btn primary">立即访问资源</a>
-                <a href="#" id="join-community" class="btn secondary">加入读者社区</a>
-            </div>
-        </div>
-    </div>
-
     <script src="script.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const videoTabs = document.querySelectorAll('.video-tab');
+        const videoPlayers = document.querySelectorAll('.video-player');
+        let currentPlayer = null;
+
+        // 加载视频函数
+        function loadVideo(bvid) {
+            return `<iframe src="//player.bilibili.com/player.html?bvid=${bvid}&page=1&high_quality=1&danmaku=0" 
+                    scrolling="no" 
+                    border="0" 
+                    frameborder="no" 
+                    framespacing="0" 
+                    allowfullscreen="true"
+                    style="width:100%;height:500px;"></iframe>`;
+        }
+
+        // 切换视频函数
+        function switchVideo(bvid) {
+            // 移除所有current类
+            videoPlayers.forEach(player => player.classList.remove('current'));
+            videoTabs.forEach(tab => tab.classList.remove('active'));
+
+            // 停止当前播放的视频
+            if (currentPlayer) {
+                const iframe = currentPlayer.querySelector('iframe');
+                if (iframe) {
+                    const videoSrc = iframe.src;
+                    iframe.src = '';
+                    iframe.src = videoSrc;
+                }
+            }
+
+            // 激活新的视频
+            const newPlayer = document.getElementById(`player-${bvid}`);
+            const newTab = document.querySelector(`[data-video="${bvid}"]`);
+            
+            if (newPlayer) {
+                newPlayer.classList.add('current');
+                newTab.classList.add('active');
+                
+                // 检查是否已经加载过视频
+                const placeholder = newPlayer.querySelector('.video-placeholder');
+                if (placeholder && !placeholder.innerHTML) {
+                    placeholder.innerHTML = loadVideo(bvid);
+                }
+                
+                currentPlayer = newPlayer;
+            }
+        }
+
+        // 为每个tab添加点击事件
+        videoTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const bvid = tab.getAttribute('data-video');
+                switchVideo(bvid);
+            });
+        });
+
+        // 初始加载第一个视频
+        const firstTab = videoTabs[0];
+        if (firstTab) {
+            const firstBvid = firstTab.getAttribute('data-video');
+            switchVideo(firstBvid);
+        }
+    });
+    </script>
 </body>
 </html> 
