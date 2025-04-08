@@ -1,0 +1,331 @@
+/* 不合时宜播客劳资争议事件调查 - 响应式样式 */
+
+/* 中等屏幕 (平板电脑, 768px-991px) */
+@media (max-width: 991px) {
+    header h1 {
+        font-size: 2.8rem;
+    }
+    
+    .podcast-intro {
+        flex-direction: column;
+    }
+    
+    .podcast-logo {
+        margin-bottom: 30px;
+    }
+    
+    .timeline::before {
+        left: 30px;
+    }
+    
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 20px;
+        left: 0;
+    }
+    
+    .right {
+        left: 0;
+    }
+    
+    .left .date, .right .date {
+        left: -40px;
+        right: auto;
+        top: 25px;
+        padding: 5px 12px;
+        font-size: 0.8rem;
+        width: auto;
+    }
+    
+    .left .timeline-icon, .right .timeline-icon {
+        left: 10px;
+        right: auto;
+    }
+    
+    .left .content::before, .right .content::before {
+        border-width: 10px 15px 10px 0;
+        border-color: transparent white transparent transparent;
+        left: -15px;
+        right: auto;
+    }
+    
+    .left .content, .right .content {
+        border-left: 3px solid var(--primary-color);
+        border-right: none;
+    }
+    
+    .tabs {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px;
+    }
+    
+    .tab {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* 小屏幕 (手机, 小于768px) */
+@media (max-width: 767px) {
+    header {
+        padding: 80px 0 60px;
+    }
+    
+    header h1 {
+        font-size: 2.2rem;
+    }
+    
+    .header-cta {
+        flex-direction: column;
+    }
+    
+    .nav-container {
+        flex-wrap: wrap;
+        padding: 10px 0;
+        height: auto;
+    }
+    
+    .nav-logo {
+        width: 70%;
+    }
+    
+    .nav-toggle {
+        display: block;
+        width: 30%;
+        text-align: right;
+    }
+    
+    .nav-links {
+        width: 100%;
+        flex-direction: column;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        margin-top: 10px;
+    }
+    
+    .nav-links.active {
+        max-height: 300px;
+    }
+    
+    .nav-link {
+        padding: 12px 0;
+        width: 100%;
+        text-align: center;
+        border-top: 1px solid #eee;
+    }
+    
+    .nav-link::after {
+        display: none;
+    }
+    
+    .section-header h2 {
+        font-size: 1.8rem;
+    }
+    
+    .podcast-metrics {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .timeline-item h3 {
+        font-size: 1.2rem;
+    }
+    
+    .evidence-gallery {
+        grid-template-columns: 1fr;
+    }
+    
+    .impact-stats {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .tab-content {
+        padding: 25px 15px;
+    }
+    
+    .case-timeline {
+        padding-left: 20px;
+    }
+    
+    .modal-content {
+        width: 95%;
+        padding: 10px;
+    }
+    
+    .close {
+        top: 10px;
+        right: 20px;
+        font-size: 30px;
+    }
+}
+
+/* 超小屏幕 (小型手机, 小于480px) */
+@media (max-width: 479px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
+    
+    header p {
+        font-size: 1rem;
+    }
+    
+    .podcast-logo {
+        flex: 0 0 150px;
+        height: 150px;
+    }
+    
+    .podcast-logo i {
+        font-size: 2.2rem;
+    }
+    
+    .left .date, .right .date {
+        position: relative;
+        display: inline-block;
+        left: 0;
+        top: 0;
+        margin-bottom: 15px;
+    }
+    
+    .timeline-item {
+        padding-left: 50px;
+    }
+    
+    .timeline::before {
+        left: 20px;
+    }
+    
+    .left .timeline-icon, .right .timeline-icon {
+        left: 0;
+    }
+    
+    .evidence-meta {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}
+
+/* 适配高分辨率显示屏 */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .header-overlay {
+        background-size: 30px 30px;
+    }
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary-color: #a480cf;
+        --secondary-color: #3a0ca3;
+        --dark-color: #10002b;
+        --light-color: #4f4f4f;
+        --medium-color: #7b2cbf;
+        --accent-color: #f72585;
+        --text-color: #e9ecef;
+        --bg-color: #121212;
+        --quote-bg: #1e1e1e;
+    }
+    
+    body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+    }
+    
+    nav, .podcast-intro, .evidence-container, .issue-card, .tab-content, .conclusion, .mini-player {
+        background-color: #1e1e1e;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    
+    .timeline-item .content, .case-event, .modal-content {
+        background-color: #242424;
+        color: var(--text-color);
+    }
+    
+    .timeline-details, .case-conclusion {
+        background-color: #2a2a2a;
+    }
+    
+    .nav-link {
+        color: var(--text-color);
+    }
+    
+    .tabs {
+        background: #1e1e1e;
+    }
+    
+    .tab {
+        color: var(--text-color);
+    }
+    
+    .evidence-meta, .platform-icon {
+        background: #2a2a2a;
+        color: var(--text-color);
+    }
+    
+    .evidence-details {
+        background: #242424;
+    }
+    
+    .left .content::before {
+        border-color: transparent transparent transparent #242424;
+    }
+    
+    .right .content::before {
+        border-color: transparent #242424 transparent transparent;
+    }
+}
+
+/* 打印样式 */
+@media print {
+    header, nav, footer, .timeline-icon, .evidence-gallery, .podcast-decoration, .audio-wave {
+        display: none !important;
+    }
+    
+    body {
+        background: white;
+        color: black;
+        font-size: 12pt;
+        line-height: 1.5;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .container {
+        max-width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .timeline::before {
+        display: none;
+    }
+    
+    .timeline-item {
+        page-break-inside: avoid;
+        width: 100%;
+        left: 0;
+        padding: 0;
+        margin-bottom: 30px;
+    }
+    
+    .evidence-meta {
+        border-top: 1px solid #ddd;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        page-break-after: avoid;
+    }
+    
+    img {
+        max-width: 100% !important;
+    }
+    
+    .left .content, .right .content {
+        border: 1px solid #ddd;
+        box-shadow: none;
+    }
+} 
