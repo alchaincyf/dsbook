@@ -32,6 +32,10 @@
             --text-color: #2b2d42;
             --bg-color: #faf9f9;
             --quote-bg: #f1f1f1;
+            --danger-color: #e63946;
+            --warning-color: #ee6c4d;
+            --success-color: #52b788;
+            --info-color: #457b9d;
         }
         
         * {
@@ -62,18 +66,375 @@
         /* 基础布局 */
         header {
             position: relative;
-            padding: 120px 0 80px;
+            padding: 80px 0 50px;
             text-align: center;
             background: var(--dark-color);
             color: white;
             overflow: hidden;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
         }
         
         /* 其他基础样式 */
         .section-header {
             text-align: center;
             margin-bottom: 40px; 
+        }
+        
+        /* 官方回应与网友反驳部分样式 */
+        .responses-section {
+            background-color: #f9f5ff;
+            padding: 60px 0;
+            margin: 40px 0;
+            border-top: 1px solid rgba(114, 9, 183, 0.1);
+            border-bottom: 1px solid rgba(114, 9, 183, 0.1);
+        }
+        
+        .response-container {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+            margin-bottom: 40px;
+        }
+        
+        .official-response {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(36, 0, 70, 0.05);
+            overflow: hidden;
+            border-left: 4px solid var(--medium-color);
+        }
+        
+        .response-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .podcast-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--medium-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+        }
+        
+        .response-meta {
+            flex: 1;
+        }
+        
+        .response-meta h3 {
+            margin: 0;
+            color: var(--dark-color);
+        }
+        
+        .response-time {
+            font-size: 14px;
+            color: #777;
+            margin: 4px 0;
+        }
+        
+        .response-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .response-tag.controversy {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .response-summary {
+            padding: 25px;
+        }
+        
+        .response-summary h4 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+            font-weight: 700;
+        }
+        
+        .highlights {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .highlight-item {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 3px solid var(--medium-color);
+        }
+        
+        .highlight-label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--dark-color);
+        }
+        
+        .highlight-item blockquote {
+            margin: 0;
+            padding: 0;
+            font-style: italic;
+            color: #555;
+        }
+        
+        .response-full-link {
+            text-align: right;
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+        
+        .btn-small {
+            display: inline-block;
+            padding: 6px 12px;
+            background: var(--medium-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-small:hover {
+            background: var(--dark-color);
+        }
+        
+        .btn-small.btn-source {
+            background-color: var(--dark-color);
+        }
+        
+        .btn-small.btn-source:hover {
+            background-color: var(--accent-color);
+        }
+        
+        .response-cover {
+            padding: 0 25px 25px;
+        }
+        
+        .response-cover.controversy {
+            position: relative;
+        }
+        
+        .response-controversy {
+            background: #fff5f7;
+            border: 1px solid #fce2e9;
+            border-radius: 8px;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .controversy-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: var(--warning-color);
+            color: white;
+            border-radius: 50%;
+            position: absolute;
+            top: -18px;
+            left: 25px;
+        }
+        
+        .response-controversy h4 {
+            margin: 0 0 15px 40px;
+            color: var(--warning-color);
+        }
+        
+        .controversy-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .controversy-list li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #fce2e9;
+        }
+        
+        .controversy-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .netizens-responses {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(36, 0, 70, 0.05);
+            padding: 30px;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .netizens-responses h3 {
+            margin-top: 0;
+            color: var(--dark-color);
+            margin-bottom: 15px;
+        }
+        
+        .response-intro {
+            margin-bottom: 25px;
+            font-size: 16px;
+            color: #555;
+        }
+        
+        .comment-source {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+        
+        .source-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 15px;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .source-link:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        .source-link i {
+            font-size: 16px;
+        }
+        
+        .comments-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .comment {
+            background: #f9f9f9;
+            border-radius: 8px;
+            padding: 15px;
+            border-left: 3px solid var(--accent-color);
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .comment-author {
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+        
+        .comment-likes {
+            font-size: 14px;
+            color: #777;
+        }
+        
+        .comment-likes i {
+            color: var(--accent-color);
+        }
+        
+        .comment-content p {
+            margin: 0;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        
+        .comment-summary {
+            background: var(--light-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .comment-summary h4 {
+            margin-top: 0;
+            color: var(--dark-color);
+            margin-bottom: 15px;
+        }
+        
+        .summary-items {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .summary-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .summary-item i {
+            color: var(--danger-color);
+            margin-top: 4px;
+        }
+        
+        .summary-item p {
+            margin: 0;
+            font-size: 14px;
+        }
+        
+        .response-conclusion {
+            margin-top: 50px;
+        }
+        
+        .conclusion-highlight {
+            background: var(--dark-color);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            position: relative;
+            text-align: center;
+        }
+        
+        .conclusion-highlight i {
+            font-size: 30px;
+            opacity: 0.3;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        
+        .conclusion-highlight p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+            font-family: "Noto Serif SC", serif;
+        }
+        
+        .conclusion-highlight .author {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .highlights {
+                grid-template-columns: 1fr;
+            }
+            
+            .summary-items {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -105,6 +466,7 @@
             <ul id="main-menu" class="nav-links">
                 <li><a href="#overview" class="nav-link">事件概述</a></li>
                 <li><a href="#timeline" class="nav-link">时间线</a></li>
+                <li><a href="#responses" class="nav-link">官方回应</a></li>
                 <li><a href="#issues" class="nav-link">主要问题</a></li>
                 <li><a href="#cases" class="nav-link">案例分析</a></li>
                 <li><a href="#evidence" class="nav-link">证据展示</a></li>
@@ -232,11 +594,245 @@
                     </div>
                 </article>
                 
+                <article class="timeline-item right">
+                    <time class="date">2025年4月8日</time>
+                    <div class="content">
+                        <span class="timeline-icon" aria-hidden="true"><i class="fas fa-reply"></i></span>
+                        <h3>不合时宜发布官方回应</h3>
+                        <p>在舆论发酵一天后，不合时宜发布长篇官方回应《关于近日风波，不合时宜的回应与声明》，试图解释拖欠工资、删除署名等问题。回应中自称"小作坊"、"营收微薄"，引发更多争议。</p>
+                        <blockquote class="timeline-details">
+                            <p><i class="fas fa-quote-left" aria-hidden="true"></i> 我们仍然认可，Siyi在前期准备上的贡献。在初始的宣传物料上，我们遗漏了给Siyi署名，这是我们的疏忽，对此我们感到抱歉。</p>
+                        </blockquote>
+                        <button class="evidence-tag" data-evidence="5"><i class="fas fa-file-alt" aria-hidden="true"></i> 查看官方回应全文</button>
+                    </div>
+                </article>
+                
                 <div class="timeline-end">
                     <div class="timeline-end-icon" aria-hidden="true">
                         <i class="fas fa-hourglass-end"></i>
                     </div>
                     <p>事件持续发酵中...</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 新增：官方回应与网友反驳部分 -->
+        <section id="responses" class="responses-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>官方回应与网友反驳</h2>
+                    <p>从"小作坊"到"遗漏"署名：不合时宜回应引发更多质疑</p>
+                </div>
+                
+                <div class="response-container">
+                    <div class="official-response">
+                        <div class="response-header">
+                            <div class="podcast-icon">
+                                <i class="fas fa-podcast" aria-hidden="true"></i>
+                            </div>
+                            <div class="response-meta">
+                                <h3>不合时宜官方回应</h3>
+                                <p class="response-time">2025年4月8日发布</p>
+                                <span class="response-tag controversy"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 存在争议</span>
+                            </div>
+                        </div>
+                        
+                        <div class="response-summary">
+                            <h4>关于近日风波，不合时宜的回应与声明</h4>
+                            <div class="highlights">
+                                <div class="highlight-item">
+                                    <span class="highlight-label">关于拖欠工资</span>
+                                    <blockquote>
+                                        <p>不合时宜跟两位前实习生Siyi和Wanting之间不存在报酬拖欠。[...] 不合时宜是一个非常小的播客兼职团队，没有专门的财务人员，中间有一些延迟支付的情况，当时也都经过了沟通。</p>
+                                    </blockquote>
+                                </div>
+                                
+                                <div class="highlight-item">
+                                    <span class="highlight-label">关于删除署名</span>
+                                    <blockquote>
+                                        <p>剽窃署名"系列制作人"的说法并不属实。[...] 在初始的宣传物料上，我们遗漏了给Siyi署名，这是我们的疏忽，对此我们感到抱歉。</p>
+                                    </blockquote>
+                                </div>
+                                
+                                <div class="highlight-item">
+                                    <span class="highlight-label">关于团队营收</span>
+                                    <blockquote>
+                                        <p>在与两位实习生合作期间（2024年3月-11月），不合时宜的营收非常微薄。两位主播王磬与若含在这期间从不合时宜获取的收入是每人每月约5500元。</p>
+                                    </blockquote>
+                                </div>
+                                
+                                <div class="highlight-item">
+                                    <span class="highlight-label">关于"情感剥削"</span>
+                                    <blockquote>
+                                        <p>关于"情感剥削"的"指控"，是最让我们感到痛苦和受伤的一点。[...] 我们一度确实认真地把她当成朋友。</p>
+                                    </blockquote>
+                                </div>
+                            </div>
+                            <div class="response-full-link">
+                                <a href="https://mp.weixin.qq.com/s/o_4IK7b3CVBo7ERYGfCJyA" target="_blank" class="btn btn-small btn-source"><i class="fas fa-external-link-alt" aria-hidden="true"></i> 官方原文链接</a>
+                            </div>
+                        </div>
+                        
+                        <div class="response-cover controversy">
+                            <div class="response-controversy">
+                                <span class="controversy-icon"><i class="fas fa-balance-scale" aria-hidden="true"></i></span>
+                                <h4>争议焦点</h4>
+                                <ul class="controversy-list">
+                                    <li><strong>将"拖欠"重新定义为"延迟支付"</strong> - 官方回应否认存在拖欠，但承认有"延迟支付"，并称"都经过了沟通"</li>
+                                    <li><strong>将"删除署名"重新定义为"遗漏"</strong> - 将不给Siyi署名归因于"疏忽"，而非故意</li>
+                                    <li><strong>用"营收微薄"为低薪辩护</strong> - 强调主播收入有限，却忽略了按时发薪的基本责任</li>
+                                    <li><strong>农夫与蛇</strong> - 官方公众号回应时使用"农夫与蛇"作为配图，暗示Siyi的不知恩图报</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="netizens-responses">
+                        <h3>网友反馈与质疑</h3>
+                        <p class="response-intro">官方回应发布后，引发大量网友不满，认为回应回避核心问题，态度傲慢，将管理责任转嫁实习生。以下为部分网友评论：</p>
+                        
+                        <div class="comment-source">
+                            <a href="http://xhslink.com/a/xv8JPSQFObN9" target="_blank" class="source-link">
+                                <i class="fas fa-comment-dots" aria-hidden="true"></i> 查看小红书原文评论
+                            </a>
+                        </div>
+                        
+                        <div class="comments-container">
+                            <div class="comment">
+                                <div class="comment-header">
+                                    <span class="comment-author">Hushhashhush</span>
+                                    <span class="comment-likes">485 <i class="fas fa-heart" aria-hidden="true"></i></span>
+                                </div>
+                                <div class="comment-content">
+                                    <p>且这些措辞的背后，有一种潜在的双标：谈发薪签合同和工作要求的时候，是老板/经营者；谈低薪酬和管理失当的时候，又变成了有感情的个人。正是这种双标和横跳，才是所谓"沟通问题"核心所在，所以写下这些解释才能自觉如此"真心实意"。</p>
+                                </div>
+                            </div>
+                            
+                            <div class="comment">
+                                <div class="comment-header">
+                                    <span class="comment-author">我正在捉妖现场</span>
+                                    <span class="comment-likes">96 <i class="fas fa-heart" aria-hidden="true"></i></span>
+                                </div>
+                                <div class="comment-content">
+                                    <p>要实习垫付款项是事实，实习生垫付了之后你们没有第一时间把钱给实习生也是事实，你们自己也说了"是一个非常小的团队"，没有专门的财务，主理人直接对接实习生，也就是说不存在大厂层层审批流程周期长的情况，那打钱不应该更快吗？怎么没有财务、人少反而变成你们拖欠工资的合理理由了？</p>
+                                </div>
+                            </div>
+                            
+                            <div class="comment">
+                                <div class="comment-header">
+                                    <span class="comment-author">乌何有</span>
+                                    <span class="comment-likes">265 <i class="fas fa-heart" aria-hidden="true"></i></span>
+                                </div>
+                                <div class="comment-content">
+                                    <p>先不说别的，作为当事人提一下P9的问题，这些所谓你说的"温情时刻"都是对方向你发问的记录，你们的回复在哪里？我记得送帽子这件事最后根本没回复（当时是因为我受邀参加节目且没有劳务费，前期没有专业对接，Siyi出于感谢和抱歉才向你们提的，说实话她为了做节目也搭上不少自己的人情，她的朋友给你们提供选题还少吗）只是因为对方提过请求就显得你对她很好很大度吗？真的很可笑，对你们更失望了</p>
+                                </div>
+                            </div>
+                            
+                            <div class="comment">
+                                <div class="comment-header">
+                                    <span class="comment-author">小红薯622B73C9</span>
+                                    <span class="comment-likes">110 <i class="fas fa-heart" aria-hidden="true"></i></span>
+                                </div>
+                                <div class="comment-content">
+                                    <p>无法支付合理的报酬，那就不要招人啊，不能说我穷但我不想干活，用很便宜的报酬要别人来做。</p>
+                                </div>
+                            </div>
+                            
+                            <div class="comment">
+                                <div class="comment-header">
+                                    <span class="comment-author">爱蜜莉</span>
+                                    <span class="comment-likes">31 <i class="fas fa-heart" aria-hidden="true"></i></span>
+                                </div>
+                                <div class="comment-content">
+                                    <p>如果siyi的内容占到了90%，怎么会忘记署名。媒体行业工资低是事实，但是谁能不知道署名权的重要性，大家倒贴来实习买的不就是经验和署名权？工资这么少还拖欠，为了署名权进来也不给，所谓的"友好关系"是别人问你问题进行回复，有主动提出什么帮助吗？面对质疑竟然是感觉身心透支，好像对方提出的并非事实一样，既然是事实又何来指责？</p>
+                                </div>
+                            </div>
+                            
+                            <div class="comment">
+                                <div class="comment-header">
+                                    <span class="comment-author">我正在捉妖现场</span>
+                                    <span class="comment-likes">34 <i class="fas fa-heart" aria-hidden="true"></i></span>
+                                </div>
+                                <div class="comment-content">
+                                    <p>第三，不管你们内部认为这个系列谁出力更多，谁更配得上制作人的title，当事人做了贡献就应该署名，至于给她啥title你们自行商议。但现实是你们没给她任何署名。在这种情况下你们扯什么谁贡献多谁应该署名制作人不是避重就轻转移焦点吗？A说我干了活我有理由上桌吃饭，你们不给A饭吃，然后说B干的活最多所以我们给B最大的碗最硬的菜，这合理吗？这有任何逻辑可言吗？笑死人了。</p>
+                                </div>
+                            </div>
+                            
+                            <div class="comment">
+                                <div class="comment-header">
+                                    <span class="comment-author">跟你开玩笑</span>
+                                    <span class="comment-likes">113 <i class="fas fa-heart" aria-hidden="true"></i></span>
+                                </div>
+                                <div class="comment-content">
+                                    <p>感觉都不是暗讽，公众号推送的封面直接是农夫与蛇..</p>
+                                </div>
+                            </div>
+                            
+                            <div class="comment">
+                                <div class="comment-header">
+                                    <span class="comment-author">折衡</span>
+                                    <span class="comment-likes">74 <i class="fas fa-heart" aria-hidden="true"></i></span>
+                                </div>
+                                <div class="comment-content">
+                                    <p>认真看完了你们的回信，包括siyi的公开信，我也在昨日看了很多遍。我还有很多疑问想询问「不合时宜」，你们用"指责"一词回复，是否合适？你们从情感和理智上，都不愿意承认自己的失职。从聊天记录里，我能看到实习生的语气是何等「热情」，这是她们为"姐姐们"提供的情绪价值。同样的，作为一个已经走上社会的姐姐，我也同样想问「不合时宜」，是什么样的工作强度要忙到"忘记"发放工资？又是什么样的粗心大意会遗漏"前期筹备者"siyi的名字？我无法理解，也难以共情。</p>
+                                </div>
+                            </div>
+                            
+                            <div class="comment">
+                                <div class="comment-header">
+                                    <span class="comment-author">永远的小苏子</span>
+                                    <span class="comment-likes">5 <i class="fas fa-heart" aria-hidden="true"></i></span>
+                                </div>
+                                <div class="comment-content">
+                                    <p>感觉看完评论区大家也该意识到，并非00后要整顿职场，而是当代的每个人都对文科生所承担的廉价、剥削、没有尊严，甚至最后要陷入文字博弈的处境感同身受。对于强调人文关怀的播客来说，劳动权益可以说是底线，绝不仅是"用文字就可以解释好的"叙述美丽海外旅居生活和遥想的人文关怀"这样诗意的事情。</p>
+                                </div>
+                            </div>
+                            
+                            <div class="comment">
+                                <div class="comment-header">
+                                    <span class="comment-author">白猫紧张</span>
+                                    <span class="comment-likes">157 <i class="fas fa-heart" aria-hidden="true"></i></span>
+                                </div>
+                                <div class="comment-content">
+                                    <p>不是吧，有始祖鸟和欧莱雅还有一大堆品牌的赞助真的收入微薄吗？</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="comment-summary">
+                            <h4>网友质疑与批评焦点</h4>
+                            <div class="summary-items">
+                                <div class="summary-item">
+                                    <i class="fas fa-ban" aria-hidden="true"></i>
+                                    <p><strong>双重标准</strong>：谈发薪签合同时是经营者，谈低薪酬和管理失当时又变成有感情的个人</p>
+                                </div>
+                                <div class="summary-item">
+                                    <i class="fas fa-ban" aria-hidden="true"></i>
+                                    <p><strong>规避责任</strong>：以"小作坊"、"没有专门财务"为由规避及时发放工资的责任</p>
+                                </div>
+                                <div class="summary-item">
+                                    <i class="fas fa-ban" aria-hidden="true"></i>
+                                    <p><strong>"遗漏"署名</strong>：一个小团队，如何会"忘记"给参与工作长达一年的实习生署名？</p>
+                                </div>
+                                <div class="summary-item">
+                                    <i class="fas fa-ban" aria-hidden="true"></i>
+                                    <p><strong>财务状况可疑</strong>：作为"头部播客"，有多个知名品牌广告，收入真的如此微薄吗？</p>
+                                </div>
+                                <div class="summary-item">
+                                    <i class="fas fa-ban" aria-hidden="true"></i>
+                                    <p><strong>伪善与傲慢</strong>：对远方的受害者充满同情，却无视身边年轻人的基本劳动权益</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="response-conclusion">
+                    <div class="conclusion-highlight">
+                        <i class="fas fa-quote-left" aria-hidden="true"></i>
+                        <p>对于强调人文关怀的播客来说，劳动权益可以说是底线，绝不仅是"用文字就可以解释好的"叙述美丽海外旅居生活和遥想的人文关怀"这样诗意的事情。</p>
+                        <span class="author">—— 网友评论</span>
+                    </div>
                 </div>
             </div>
         </section>
